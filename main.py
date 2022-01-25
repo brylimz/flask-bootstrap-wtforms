@@ -1,15 +1,17 @@
 from flask import Flask, render_template
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, PasswordField, SubmitField, validators
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email')
-    password = StringField('Password')
+    email = StringField('Email', [validators.data_required()])
+    password = PasswordField('Password', [validators.data_required()])
+    submit = SubmitField("Log In")
+
 
 
 app = Flask(__name__)
-app.secret_key = "hoho"
+app.secret_key = "some secret"
 
 
 @app.route("/")
